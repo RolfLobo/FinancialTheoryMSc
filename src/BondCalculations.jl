@@ -1,16 +1,24 @@
 """
-    BondPrice3(Y,cf,m)
+    BondPrice(Y,cf,m;ContRateQ=false)
 
 Calculate bond price as sum of discounted cash flows.
 
 # Input:
-- Y:  scalar or K vector of interest rates
-- cf: K vector of cash flows
-- m:  K vector of times for the cash flows
+- `Y`:  scalar or K vector of interest rates
+- `cf`: K vector of cash flows
+- `m`:  K vector of years to the cash flows
+- `ContRateQ`: if true: `Y` is interpreted as a continously compounded rate
 """
-function BondPrice3(Y,cf,m)              #cf is a vector of all cash flows at times m
-    (length(cf) != length(m)) && error("cf and m must have the same lengths")
-    cdisc = cf./((1.0.+Y).^m)            #cf1/(1+Y1)^m1, cf2/(1+Y2)^m2 + ...
-    P     = sum(cdisc)                   #price
+function BondPrice(Y,cf,m;ContRateQ=false)              #cf is a vector of all cash flows at times m
+    if length(cf) != length(m)
+        error("BondPrice: cf and m must have the same lengths")
+    end
+    if ContRateQ
+        cdisc = cf./exp.(m.*Y)
+    else
+        cdisc = cf./((1.0.+Y).^m)        #c/(1+y[1])^t1 + c/(1+y[2])^t2 + ...+ c/(1+y[m])^tm
+    end
+    P = sum(cdisc)                       #price
     return P
 end
+
