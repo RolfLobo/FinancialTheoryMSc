@@ -24,5 +24,5 @@ This repository contains Julia code for a MSc course in Financial Theory at UNIS
 
 5. The plots are in png format. If you want sharper plots, change `default(fmt = :png)` to `default(fmt = :svg)` in one of the top cells.
 
-5. The current version is tested on Julia 1.11.
+5. The current version is tested on Julia 1.12.
 
