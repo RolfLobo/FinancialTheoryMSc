@@ -40,7 +40,7 @@ function MVTangencyP(μ,Σ,Rf)           #calculates the tangency portfolio
     μᵉ    = μ .- Rf                    #expected excess returns
     Σ_1   = inv(Σ)
     w     = Σ_1 *μᵉ/(ones(n)'Σ_1*μᵉ)
-    muT   = w'μ + (1-sum(w))*Rf
+    muT   = w'μᵉ + Rf
     StdT  = sqrt(w'Σ*w)
     return w,muT,StdT
 end

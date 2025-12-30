@@ -6,7 +6,7 @@ CRRparams(σ,m,n,y)
 function CRRparams(σ,m,y,n)
     h = m/n                 #time step size (in years)
     u = exp(σ*sqrt(h))      #up move
-    d = exp(-σ*sqrt(h))     #down move
+    d = 1/u                 #down move
     p = (exp(y*h) - d)/(u-d) #rn prob of up move
     return h,u,d,p
 end
